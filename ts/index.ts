@@ -1,6 +1,6 @@
 const React = require('react');
 
-window.react_create_element = React.createElement;
+(window as any).react_create_element = React.createElement;
 
 import("../pkg/index.js")
   .then(x => {

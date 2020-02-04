@@ -1,6 +1,9 @@
 use wasm_bindgen::prelude::*;
 use web_sys::console;
 
+mod react;
+
+use react::*;
 
 // When the `wee_alloc` feature is enabled, this uses `wee_alloc` as the global
 // allocator.
@@ -11,19 +14,14 @@ use web_sys::console;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-extern "C" {
-    fn react_create_element(element: JsValue, props: JsValue) -> JsValue;
-}
-
-#[wasm_bindgen]
 pub struct HelloProps {
     name: String
 }
 
-#[wasm_bindgen]
-pub fn Hello(props: HelloProps) -> JsValue {
-    react_create_element(JsValue::from_str("div"), JsValue::undefined())
-}
+// #[wasm_bindgen]
+// pub fn Hello(props: HelloProps) -> JsValue {
+//     react_create_element(JsValue::from_str("div"), JsValue::undefined())
+// }
 
 // This is like the `main` function, except for JavaScript.
 #[wasm_bindgen(start)]
