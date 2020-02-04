@@ -10,6 +10,20 @@ use web_sys::console;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
+#[wasm_bindgen]
+extern "C" {
+    fn react_create_element(element: JsValue, props: JsValue) -> JsValue;
+}
+
+#[wasm_bindgen]
+pub struct HelloProps {
+    name: String
+}
+
+#[wasm_bindgen]
+pub fn Hello(props: HelloProps) -> JsValue {
+    react_create_element(JsValue::from_str("div"), JsValue::undefined())
+}
 
 // This is like the `main` function, except for JavaScript.
 #[wasm_bindgen(start)]
@@ -18,7 +32,6 @@ pub fn main_js() -> Result<(), JsValue> {
     // It's disabled in release mode so it doesn't bloat up the file size.
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
-
 
     // Your code goes here!
     console::log_1(&JsValue::from_str("Hello world!"));
